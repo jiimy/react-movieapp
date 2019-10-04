@@ -1,0 +1,587 @@
+// @import '../../style/helpers/index';
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* 화면 내의 모든 z-index값을 정의한다. */
+/* ============================= */
+/* = z-index 정의서 (변동 가능) = */
+/* ============================ */
+/*
+popup :  100
+popup-content : 110;
+dim : 90
+slide :
+*/
+.zindex0 {
+  z-index: 0;
+}
+
+.look-at-me-talk,
+#frogue-talkpop {
+  // display: block!important;
+  // display: block!important;
+  // animation: block 1s both 2s!important;
+}
+
+@keyframes block {
+  0% {
+    display: block !important;
+    opacity: 1;
+    background: blue;
+  }
+
+  100% {
+    display: block !important;
+    opacity: 1;
+    z-index: 1;
+    background: red;
+  }
+}
+
+$zindex : (popup:100,
+  popup-content:110,
+  dim:90,
+  header:20,
+  t-progressbar:10,
+  t-answer-list-chk:20);
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+/* ============================ */
+/* = display 속성 (변동 가능 ) = */
+/* ============================ */
+.block {
+  display: block !important;
+}
+
+.none {
+  display: none !important;
+}
+
+.inlineblock {
+  display: inline-block !important;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+/* ============================ */
+/* = layout 속성 ( 추가 가능 ) = */
+/* ============================ */
+/* 테이블 태그 대체용 */
+.l-table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.l-table-row {
+  display: table-row;
+}
+
+.l-table-th,
+.l-table-cell {
+  display: table-cell;
+}
+
+.l-table-cell {
+  // cursor: pointer;
+}
+
+.opacity3 {
+  opacity: 0.3;
+}
+
+/* 테이블처럼 보이는 layout style */
+// virtual 의  V 
+.v-table {
+  display: block;
+}
+
+.v-table-row {
+  display: block;
+  font-size: 0;
+
+  &:before {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    content: '';
+  }
+}
+
+.v-table-th,
+.v-table-cell {
+  display: inline-block;
+}
+
+.l-half-l,
+.l-half-r {
+  display: inline-block;
+  width: 50%;
+}
+
+.l-half-l {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.l-half-r {
+  text-align: right;
+  vertical-align: middle;
+
+  .l-filter,
+  .l-brand-search {
+    text-align: left;
+  }
+}
+
+.l-left {
+  float: left;
+}
+
+.l-right {
+  float: right;
+}
+
+.clear_fix:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+/* 버튼 layout의 갯수에 상관없이 가운데로 오게 하기 */
+.l-btn-wrap {
+  text-align: center;
+  letter-spacing: -5px;
+}
+
+.l-btn {
+  display: inline-block;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+/* margin과 padding속성-마진 음수일경우 뒤에 - 를 하나 더 붙임 */
+/* 퍼센트일 경우 뒤에 p (p가 percent가 될수도, point가 될 수도 있어서 혼돈이 올 수 있겠다.) */
+.width100p {}
+
+.l-inner-10p {
+  padding: 10%;
+}
+
+.l_inner-r20 {
+  padding-right: 20px;
+}
+
+.l-outer-215- {
+  margin-bottom: -215px;
+}
+
+.l-mt-20 {
+  margin-top: 20px;
+}
+
+/* width */
+.l-width240 {
+  width: 240px;
+}
+
+
+/* vertical-align */
+.l-align_middle {
+  vertical-align: middle;
+}
+
+/* Special layout */
+/* 가로에 맞춰 세로도 유지되게 */
+.l-ratiobox-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 56.26%;
+}
+
+.l-ratiobox-wrapper .item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+/* ========================== */
+/* = text 속성 ( 추가 가능 ) = */
+/* ========================== */
+/*t-line_height */
+.t-line_height30 {
+  line-height: 30px;
+}
+
+/* t-text_align */
+.t-right {
+  text-align: right;
+}
+
+.t-left {
+  text-align: left;
+}
+
+.t-weight300 {
+  font-weight: 300;
+}
+
+.t-bold {
+  font-weight: 500;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+/* ============================================= */
+/* = basic Component 속성 ( 추가 및 변동 가능 ) = */
+/* =============================================*/
+
+label:hover {
+  cursor: pointer;
+}
+
+.closebtn:hover {
+  cursor: pointer;
+}
+
+/* 탭 사용시 */
+// .tab { display: none; }
+// .tab_active { display: block; }
+
+/* a링크의 기본 이벤트 막기 - js상에서 할 필요가 없다. */
+.unLink {
+  pointer-events: none;
+}
+
+.unLink:hover {
+  cursor: pointer;
+}
+
+/* ie10이하는 작동하기 않기 때문에 아래를 사용한다. */
+.unLinkCover {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
+/* select 태그의 custom */
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap:before {
+  content: '';
+  /* content 변경 */
+  color: #fff;
+  /* 색상 변경 */
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  pointer-events: none;
+}
+
+select {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.blind {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.textarea {
+
+  ul,
+  ol {
+    padding-left: 16px;
+  }
+
+  ul li {
+    list-style: disc;
+  }
+
+  ol li {
+    list-style: decimal;
+  }
+}
+
+/* ============================ */
+/* = evennt 속성 (변동 가능 ) = */
+/* ============================ */
+
+.not-drag {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+.none-event {
+  pointer-events: none !important;
+}
+
+.v-hidden {
+  visibility: hidden;
+}
+
+.dotdotdot {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+span.b {
+  font-weight: 500;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.btnwrap {
+  text-align: center;
+}
+
+
+input[type=range] {
+  -webkit-appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb {
+    // border: 1px solid #2497E3;
+    // height:19.2px;
+    // width: 10px;
+    // background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: 0px;
+  }
+}
+
+// 아카데미
+.classmode {
+  position: relative;
+}
+
+.big-title {
+  @include vw-convert(font-size, 80px);
+  @include font;
+  text-align: center;
+  font-weight: 600;
+  // @include text-animation(1.2, 0);
+  @include animation(1.2, 0, text);
+}
+
+.small-title {
+  @include vw-convert(font-size, 48px);
+  @include font;
+  text-align: center;
+  color: $navy;
+  font-weight: 500;
+  @include vw-convert(margin-bottom, 20px);
+
+  &:before {
+    display: inline-block;
+    vertical-align: middle;
+    @include vw-convert(width, 64px);
+    @include vw-convert(height, 64px);
+    @include vw-convert(margin-right, 5px);
+  }
+}
+
+.page-content-ment {
+  @include vw-convert(font-size, 32px);
+  @include font;
+  color: $gray90;
+  font-weight: 500;
+  @include vw-convert(margin-top, 40px);
+  @include vw-convert(letter-spacing, -0.6px);
+  @include vw-convert(padding, 0px 40px);
+  text-align: center;
+}
+
+.page-content-title {
+  position: relative;
+  @include vw-convert(font-size, 32px);
+  text-align: center;
+  @include font;
+  font-weight: 600;
+  @include vw-convert(width, 1280px);
+  @include vw-convert(border-radius, 16px);
+  @include vw-convert(padding, 30px 40px);
+}
+
+.maketeam-layout,
+.queturepoint-layout,
+.activity-layout,
+.quetureranking-layout {
+  .small-title {
+    &:before {
+      display: inline-block;
+      vertical-align: middle;
+      @include vw-convert(width, 64px);
+      @include vw-convert(height, 64px);
+      background: url('../components/img/book-icon.svg') no-repeat center;
+      @include vw-convert(background-size, 64px 64px);
+      content: '';
+    }
+  }
+}
+
+.gameexplain-layout,
+.gameranking-layout {
+  .small-title {
+    &:before {
+      display: inline-block;
+      vertical-align: middle;
+      @include vw-convert(width, 64px);
+      @include vw-convert(height, 64px);
+      background: url('../components/img/game-icon.svg') no-repeat center;
+      @include vw-convert(background-size, 64px 64px);
+      content: '';
+    }
+  }
+}
+
+.inputwrap {
+  position: relative;
+
+  input[type="text"],
+  input[type="password"] {
+    border: none;
+    background: transparent;
+    @include vw-convert(padding, 18px 70px 18px 70px);
+    border-bottom: 2px solid #abb9c5;
+    width: 100%;
+    color: #536476;
+    @include vw-convert(font-size, 20px);
+
+    &::placeholder {
+      @include vw-convert(font-size, 20px);
+      color: #abb9c5;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+
+    &:valid {
+      border-bottom: 2px solid #536476;
+    }
+
+    &:focus {
+      outline: 0;
+      border-bottom: 2px solid #536476;
+    }
+  }
+
+  &.login,
+  &.pw {
+    &:before {
+      position: absolute;
+      top: 0;
+      @include vw-convert(left, 10px);
+      bottom: 0;
+      margin: auto;
+      @include vw-convert(width, 50px);
+      @include vw-convert(height, 50px);
+      content: '';
+    }
+
+    &.is-true,
+    &.is-false {
+      &:after {
+        position: absolute;
+        top: 0;
+        // @include vw-convert(bottom, 5px);
+        bottom: 0;
+        margin: auto;
+        @include vw-convert(right, 10px);
+        @include vw-convert(width, 50px);
+        @include vw-convert(height, 50px);
+        content: '';
+      }
+    }
+
+    &.is-true {
+      &:after {
+        background: url('../components/img/input-true.svg') no-repeat center;
+        @include vw-convert(background-size, 50px 50px);
+      }
+    }
+
+    &.is-false {
+      .false-ment {
+        display: block;
+      }
+
+      &:after {
+        background: url('../components/img/input-false.svg') no-repeat center;
+        @include vw-convert(background-size, 50px 50px);
+      }
+    }
+  }
+
+  &.login {
+    &:before {
+      background: url('../components/img/login-input.svg') no-repeat center;
+      @include vw-convert(background-size, 50px 50px);
+    }
+  }
+
+  &.pw {
+    &:before {
+      background: url('../components/img/pw-input.svg') no-repeat center;
+      @include vw-convert(background-size, 50px 50px);
+    }
+  }
+
+  .false-ment {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: $red;
+    @include vw-convert(font-size, 16px);
+  }
+}
