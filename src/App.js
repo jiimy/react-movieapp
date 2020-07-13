@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Header from './component/header/header';
+
+import Main from './pages/Main';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header/>
+        <Main/>
       </div>
     );
   }
