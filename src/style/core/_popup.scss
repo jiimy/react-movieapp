@@ -1,0 +1,429 @@
+@import "../../style/helpers/index";
+
+$path:'../components/img/';
+
+// donny start
+.overlay {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  >.popup {
+    display: block;
+    outline: none;
+  }
+}
+
+// donny end
+
+.popup {
+  // display: none;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+
+  &-closebtn {
+    position: absolute;
+    @include vw-convert(width, 40px);
+    @include vw-convert(height, 40px);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:after {
+      @include absolute-full;
+      @include vw-convert(width, 18px);
+      @include vw-convert(height, 18px);
+      background: url('../components/img/icon_close.png') no-repeat center;
+      @include vw-convert(background-size, 18px 18px);
+      content: '';
+    }
+  }
+
+  .big-title {
+    animation: none;
+  }
+
+  .effect {
+    animation: none;
+  }
+
+  .popup-wrap {
+    text-align: center;
+    height: 100%;
+    overflow-y: auto;
+
+    &:after {
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+      content: '';
+    }
+  }
+
+  &-content {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    z-index: 110;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 8px solid $navy;
+    border-radius: 16px;
+  }
+}
+
+// 학생리스트
+.popup-student-list {
+  .popup-closebtn {
+    @include vw-convert(top, 19px);
+    @include vw-convert(right, 19px);
+    background: rgba(white, 0.2);
+  }
+
+  .popup-content {
+    background: white;
+    @include vw-convert(width, 780px);
+  }
+
+  .title {
+    @include vw-convert(padding, 17px 17px 25px 17px);
+    background: $navy;
+    @include vw-convert(font-size, 32px);
+    @include font;
+    text-align: left;
+    color: white;
+  }
+
+  .list {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      bottom: 0;
+      @include vw-convert(right, 13px);
+      left: 0;
+      @include vw-convert(height, 82px);
+      background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+      content: '';
+    }
+
+    &__title {
+      @include vw-convert(padding, 0px 32px);
+      box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
+
+      li {
+        display: inline-block;
+        width: calc(100% / 5);
+        @include vw-convert(line-height, 54px);
+        @include vw-convert(font-size, 20px);
+        color: #999;
+        font-weight: 500;
+      }
+    }
+
+    &__content {
+      @include vw-convert(height, 420px);
+      @include vw-convert(padding, 33px 32px 0px 32px);
+      overflow-y: auto;
+
+      ul {
+        @include vw-convert(margin-bottom, 33px);
+      }
+
+      li {
+        display: inline-block;
+        width: calc(100% / 5);
+        @include vw-convert(font-size, 24px);
+      }
+    }
+  }
+
+  .chk-btn {
+    text-align: right;
+    @include vw-convert(padding, 0px 16px 16px 0px);
+
+    button {
+      @include vw-convert(min-width, 124px);
+      @include vw-convert(line-height, 42px);
+      background: $navy;
+      color: white;
+      @include vw-convert(font-size, 24px);
+      @include vw-convert(border-radius, 50px);
+    }
+  }
+}
+
+// 페이지 미리보기
+.popup-page-preview {
+  position: absolute;
+  @include vw-convert(width, 496px);
+  @include vw-convert(height, 326px);
+  top: auto;
+  @include vw-convert(bottom, 80px);
+  left: auto;
+  @include vw-convert(right, 400px);
+
+  .popup-wrap {
+    overflow: visible;
+  }
+
+  .popup-closebtn {
+    @include vw-convert(top, 11.5px);
+    @include vw-convert(right, 11.5px);
+    background: rgba(#333a53, 0.7);
+    border-radius: 50%;
+  }
+
+  .popup-content {
+    box-sizing: border-box;
+    background: url('../../components/Teacher/layout/img/basicbg.svg') no-repeat center top;
+    background-size: contain;
+  }
+
+  .content {
+    @include vw-convert(width, 480px);
+    @include vw-convert(height, 270px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .attendance-layout {
+      transform: scale(0.25);
+    }
+  }
+
+  .page-number {
+    background: $navy;
+    color: white;
+    @include vw-convert(font-size, 24px);
+    @include vw-convert(padding, 12px 0px 0px 0px);
+
+    span {
+      display: inline-block;
+      @include vw-convert(margin, 0px 4px);
+      font-weight: 500;
+    }
+  }
+}
+
+// 강의 경로
+.popup-lecture-path {
+  position: absolute;
+  @include vw-convert(width, 489px);
+  @include vw-convert(height, 268px);
+  top: auto;
+  right: auto;
+  @include vw-convert(left, 20px);
+  @include vw-convert(bottom, 75px);
+  background: white;
+  @include vw-convert(border-radius, 16px);
+
+  .popup-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .lecture-route {
+    text-align: left;
+    @include vw-convert(padding, 20px 0px 20px 42px);
+
+    li {
+      position: relative;
+      @include auto-count(10);
+      @include vw-convert(margin-top, 38px);
+
+      .queture-name {
+        &:after {
+          display: inline-block;
+          width: 1px;
+          @include vw-convert(height, 16px);
+          @include vw-convert(margin, 0px 10px);
+          background: rgba($navy, 0.5);
+          vertical-align: baseline;
+          content: '';
+        }
+      }
+
+      .point {
+        display: inline-block;
+
+        &:before,
+        &:after {
+          display: inline-block;
+          vertical-align: middle;
+          @include vw-convert(width, 4px);
+          @include vw-convert(height, 8px);
+          @include vw-convert(margin, 0px 8px 4px 8px);
+          background: url('#{$path}/lecture-route.svg') no-repeat center;
+          @include vw-convert(background-size, 4px 8px);
+          content: '';
+        }
+      }
+
+      &.is-gone-view {
+        &:before {
+          background: $navy;
+        }
+
+        &:after {
+          background: $navy;
+        }
+      }
+
+      &.is-view {
+        &:before {
+          background: $blue;
+        }
+
+        .queture-name {
+          font-weight: 600;
+        }
+
+        .point {
+          color: $blue;
+          font-weight: 600;
+
+          &:before {
+            background: url('#{$path}/lecture-route-select.svg') no-repeat center;
+          }
+        }
+      }
+
+      &:before {
+        @include vw-convert(width, 24px);
+        @include vw-convert(height, 24px);
+        background: #999;
+        border-radius: 50%;
+        @include vw-convert(line-height, 22px);
+        color: white;
+        @include vw-convert(font-size, 20px);
+        font-weight: 500;
+        outline: 1px solid transparent;
+      }
+
+      &:after {
+        position: absolute;
+        top: 100%;
+        @include vw-convert(left, 10px);
+        @include vw-convert(width, 3px);
+        @include vw-convert(height, 35px);
+        background: #999;
+        content: '';
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        &:after {
+          content: none;
+        }
+      }
+
+      p {
+        display: inline-block;
+        vertical-align: middle;
+        @include vw-convert(margin-left, 15px);
+        @include vw-convert(font-size, 20px);
+        color: $navy;
+        // span {
+        //   display: inline-block;
+        //   vertical-align: middle;
+        // }
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scaleup {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup-select-battletype {
+  background: rgba(#222943, 0.5);
+
+  .popup-wrap {
+    &:before {
+      @include absolute-full;
+      @include vw-convert(width, 1242px);
+      @include vw-convert(height, 1243px);
+      background: url('../components/img/mvp-bg.svg') no-repeat center;
+      @include vw-convert(background-size, 1242px 1243px);
+      animation: rotate 15s infinite linear;
+      content: '';
+    }
+  }
+
+  .popup-content {
+    @include vw-convert(width, 400px);
+    border-color: #ef6b69;
+    background: white;
+    animation: scaleup 0.7s cubic-bezier(0, 0, 0.15, 1.01);
+    ;
+  }
+
+  strong {
+    display: inline-block;
+    @include vw-convert(margin-top, 50px);
+    @include vw-convert(font-size, 48px);
+    color: $red;
+    @include font;
+  }
+
+  p {
+    @include font;
+    @include vw-convert(font-size, 24px);
+    color: $navy;
+    font-weight: 500;
+  }
+
+  .select-solo {
+    transform: scale(0.55);
+    @include vw-convert(margin, -215px -50px -180px -50px);
+  }
+
+  .selected-battletype {
+    &.team {
+      .select-solo {
+        display: none;
+      }
+
+      .select-team {
+        display: block;
+      }
+    }
+
+    .select-team {
+      display: none;
+      transform: scale(1.3);
+    }
+  }
+}

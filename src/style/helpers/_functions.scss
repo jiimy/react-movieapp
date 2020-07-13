@@ -1,0 +1,405 @@
+$breakpoints-mobile : 768;
+// pc 1920
+$pc-full : 1920;
+
+@function randomNum($min, $max) {
+  $rand: random();
+  $randomNum: $min + floor($rand * (($max - $min) + 1));
+
+  @return $randomNum;
+}
+
+// pc full 1920기준
+@function vw-convert-pcfull($target){
+  $vw-content: ($pc-full * 0.01) * 1px;
+  $result: ();
+  $length: length($target);
+
+  @if($length==1) {
+    @return ($target / $vw-content) * 1vw;
+  }
+
+  @else if($length==2) {
+    $result: append($result, nth($target, 1) / $vw-content +vw);
+    $result: append($result, nth($target, 2) / $vw-content +vw);
+    $result: append($result, nth($target, 1) / $vw-content +vw);
+    $result: append($result, nth($target, 2) / $vw-content +vw);
+    @return $result;
+  }
+
+  @else if($length==3) {
+    $result: append($result, nth($target, 1) / $vw-content +vw);
+    $result: append($result, nth($target, 2) / $vw-content +vw);
+    $result: append($result, nth($target, 3) / $vw-content +vw);
+    $result: append($result, nth($target, 2) / $vw-content +vw);
+    @return $result;
+  }
+
+  @else if($length==4) {
+    @for $i from 1 through 4 {
+      $result: append($result, nth($target, $i) / $vw-content +vw);
+    }
+
+    @return $result;
+  }
+}
+
+@function vw-convert-bg-size-full($target) {
+  $vw-content: ($pc-full * 0.01) * 1px;
+  $result: ();
+  $result: append($result, nth($target, 1) / $vw-content *1vw);
+  $result: append($result, nth($target, 2) / $vw-content *1vw);
+  @return $result;
+}
+
+@mixin vw-convert($value, $size, $mode:'pc', $flag:'false') {
+  @if ($mode =='pc') {
+    @media (min-width: $breakpoints-mobile+'px') and (max-width: ($pc-full - 1+'px')) {
+      @if ($value==background-size) {
+        #{$value}: vw-convert-bg-size-full($size);
+      }
+      @else if(type-of($size)==string) {
+        #{$value}: $size;
+      }
+      @else {
+        @if($flag=='true') {
+          #{$value}: vw-convert-pcfull($size) !important;
+        }
+        @else {
+          #{$value} : vw-convert-pcfull($size);
+        }
+      }
+    }
+    @media (min-width: ($pc-full+'px')) {
+      #{$value} : $size;
+    }
+  }
+}
+
+// 
+@mixin scale-zoom ($timing){
+  @content;
+}
+
+/* ============================ */
+/* =========== 기본 =========== */
+/* ============================ */
+@mixin clearfix() {
+  &:after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+
+// 폰트
+@mixin font() {
+  font-family: 'HGSoftGGothicssi';
+}
+
+/* == TODO: 이미지 관련 함수== */
+// 이미지 백그라운드 랜덤 포지션
+@mixin bg-position-random(){
+  $x : random(100);
+  $y : random(100);
+  @content;
+  background-position: #{$x}unquote('%') #{$y}unquote('%');
+}
+// 이미지 반복
+@mixin img ($path, $file-name, $extension: 'png') {
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}){
+      .img {
+        background:url('#{$path}#{$file-name}#{$i}.#{$extension}');
+        @content;
+      }
+    }
+  }
+}
+
+@mixin absolute-full($type:true) {
+  @if($type==true){
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  @if($type==remove){
+    position: static;
+  }
+  @if($type==transform){
+    transform: translate(-50%,-50%);
+    top:50%;
+    left:50%;
+  }
+}
+
+/* == 자식들 갯수에 맞춰 100% == */
+/* == count 값엔 자식의 갯수 === */
+@mixin childs-full($count) {
+  @for $i from 1 through $count {
+    width: percentage(1/$i);
+  }
+}
+
+/* == 자동으로 숫자리스트넣어주기 == */
+/* === number 값엔 카운트할 갯수 == */
+@mixin auto-count($number, $start-number:1) {
+  &:before {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+  }
+  @for $i from $start-number through $number {
+    &:nth-child(#{$i}) {
+      &:before {
+        content:'#{$i}'
+      }
+    }
+  }
+  @if($start-number : 10) {
+    // @for $start-number+1 from 1 through $number {
+    //   &:nth-child(#{$i}) {
+    //     &:before {
+    //       content:'0#{$i}'
+    //     }
+    //   }
+    // }
+  }
+  // }
+  // @if ($toggle = 'off'){
+  //   @for $i from 1 through $number {
+  //     &:nth-child(#{$i}){
+  //         &:before {
+  //           background:none;
+  //           content:none;
+  //       }
+  //     }
+  //   }
+  // }
+}
+
+// 01, 02, 03~
+@mixin auto-count-zero($number) {
+  &:before {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+  }
+  @for $i from 1 through $number {
+    &:nth-child(#{$i}) {
+      &:before {
+        content:'0#{$i}'
+      }
+    }
+  }
+}
+
+@mixin auto-count-class($number, $class){
+  .#{$class}{
+    &:before {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+  @for $i from 1 through $number {
+    &:nth-child(#{$i}) {
+      .#{$class}{
+        &:before {
+          content:'#{$i}'
+        }
+      }
+    }
+  }
+}
+
+// 말줄임
+@mixin dotdotdot($type:dot) {
+  @if($type==dot){
+    white-space : nowrap;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    @content;
+  }
+  @if($type==remove) {
+    white-space: normal;
+    overflow: inherit;
+    text-overflow: inherit;
+    @content;
+  }
+}
+
+// l-scroll-y
+@mixin scroll-y() {
+  @include vw-convert-mo(){
+    overflow-y:hidden;
+    overflow: auto;
+    width:100%;
+    ul {
+      overflow:hidden;
+      width:max-content;
+      white-space: nowrap;
+    }
+  }
+}
+
+// 버튼 클릭시 눌리는 효과
+@mixin btn-click($pixel, $box-shadow) {
+  box-shadow: 0 #{$pixel} 0 0 $box-shadow;
+  transition: all 0.2s;
+  // margin-bottom:6px;
+  &:active {
+    transform: translateY(4px);
+    margin-bottom: 0;
+    overflow: hidden;
+    box-shadow: 0px 2px 0 0 $box-shadow !important ;
+  }
+}
+
+// 버튼 클릭시 눌리는 효과 제거
+@mixin remove-btn-click() {
+  box-shadow: none;
+  // box-shadow: $box-shadow;
+  transition: none;
+  @content;
+  // margin-bottom:6px;
+  &:active {
+    transform: none;
+    margin-bottom: 0;
+    overflow: hidden;
+    box-shadow: none;
+  }
+}
+
+// inline-block 세로 중앙정렬
+@mixin vertical-center($mode:"before"){
+  @if($mode=='before'){
+    &:before{
+      display: inline-block;
+      vertical-align: middle;
+      height:100%;
+      content:'';
+    }
+  }
+  @if($mode=='after'){
+    &:after{
+      display: inline-block;
+      vertical-align: middle;
+      height:100%;
+      content:'';
+    }
+  }
+}
+
+@mixin select-bg {
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  @content;
+}
+
+@mixin box-shadow ($pixel, $color, $type, $mode:"ta") {
+  @if($mode=='pc') {
+    $result: vw-convert-pcfull($pixel);
+    box-shadow: 0 $result 0 0 $color $type;
+  }
+}
+
+@mixin margin-auto() {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+@mixin text-shadow($pixel, $color) {
+  text-shadow: -$pixel 0 $color, 0 $pixel $color, $pixel 0 $color, #{0} -$pixel $color;
+}
+
+// FIXME: 키프레임
+@mixin customKeyframe($name, $timer, $duration, $delay:0 ) {
+  animation: $name $timer+s $duration ;
+  animation-play-state: running;
+  animation-delay: $delay+s;
+}
+
+// ======================
+// === 애니메이션 부분 ===
+// ======================
+@keyframes text {
+  0% {
+    opacity: 0;
+    transform: translateY(120px);
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@keyframes cardscale {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes dom {
+  0% {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@keyframes card-bg {
+  0% {
+    background:white;
+    z-index: 1;
+  }
+  50% {
+    background:#FFEA36;
+    z-index: 1;
+  }
+  100% { 
+    background:transparent;
+    z-index: -1;
+  }
+}
+@keyframes darkenimg {
+  0% {
+    mix-blend-mode: darken;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    mix-blend-mode: normal;
+  }
+}
+@mixin animation($timer, $delay:0, $name:'') {
+  animation: $name $timer+s both ;
+  -ms-animation: $name $timer+s both ;
+  -webkit-animation: $name $timer+s both ;
+  animation-play-state: running;
+  animation-delay: $delay+s;
+  @content;
+}
